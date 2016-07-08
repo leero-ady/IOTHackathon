@@ -46,7 +46,7 @@ public class DashBoardActivity extends Activity {
     @OnClick(R.id.submit)
     void navigateToSelectionScreen() {
         if (!TextUtils.isEmpty(from.getText()) && !TextUtils.isEmpty(to.getText())) {
-            startActivity(new Intent(this, BusActivity.class));
+            startActivity(new Intent(this, MapsActivity.class));
         }
     }
 
