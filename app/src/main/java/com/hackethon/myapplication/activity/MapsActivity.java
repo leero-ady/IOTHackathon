@@ -16,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.hackethon.myapplication.R;
@@ -104,10 +105,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
         ((ApplicationClass) getApplicationContext()).getDirectionAPIService().getDirections("Pune", "Katraj").
                 enqueue(new Callback<DirectionModel>() {
                     @Override
@@ -116,6 +113,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         ArrayList<LatLng> points = new ArrayList<LatLng>();
                         for (int i = 0; i < response.body().getRoutes().size(); i++) {
                             for (int j = 0; j < response.body().getRoutes().get(i).getLegs().size(); j++) {
+                                LatLngBounds latLngBounds=new LatLngBounds(
+                                        new LatLng(response.body().getRoutes().get(j).getBounds().getSouthwest().getLat(),
+                                                response.body().getRoutes().get(j).getBounds().getSouthwest().getLng()),
+                                        new LatLng(response.body().getRoutes().get(j).getBounds().getNortheast().getLat(),
+                                        response.body().getRoutes().get(j).getBounds().getNortheast().getLng())
+                                        );
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds,30));
+
                                 for (int k = 0; k < response.body().getRoutes().get(i).getLegs().get(j).getSteps().size(); k++) {
                                     for (int x = 0; x < response.body().getRoutes().get(i).getLegs().get(j).getSteps().size(); x++) {
                                         Log.d(TAG, response.body().getRoutes().get(i).getLegs().get(j).getSteps().get(x).getHtmlInstructions());
