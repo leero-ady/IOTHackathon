@@ -2,21 +2,17 @@ package com.hackethon.myapplication.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.media.session.MediaControllerCompat;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.hackethon.myapplication.R;
 import com.hackethon.myapplication.activity.model.DirectionModel;
@@ -105,9 +101,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
         ((ApplicationClass) getApplicationContext()).getDirectionAPIService().getDirections("Pune", "Katraj").
                 enqueue(new Callback<DirectionModel>() {
                     @Override
