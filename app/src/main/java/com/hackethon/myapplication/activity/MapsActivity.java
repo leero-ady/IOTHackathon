@@ -5,14 +5,17 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.hackethon.myapplication.R;
 import com.hackethon.myapplication.activity.model.DirectionModel;
@@ -28,6 +31,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private static final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     private static final String TAG = "MapsActivity";
+    private LocationInfo locationInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,17 +105,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        ((ApplicationClass) getApplicationContext()).getDirectionAPIService().getDirections("Pune", "Katraj").
+         locationInfo = Util.getLocationInfoObject(this);
+         System.out.println("The Location object received is " + locationInfo);
+
+         String origCoord = String.valueOf(locationInfo.getOrigLat()) + "," + String.valueOf(locationInfo.getOrigLong());
+         String  destCoord = String.valueOf(locationInfo.getDestLat()) + "," + String.valueOf(locationInfo.getDestLong());
+
+                ((ApplicationClass) getApplicationContext()).getDirectionAPIService().getDirections(origCoord, destCoord).
                 enqueue(new Callback<DirectionModel>() {
                     @Override
                     public void onResponse(Call<DirectionModel> call, Response<DirectionModel> response) {
-                        Log.d(TAG, "onResponse() called with: " + "call = [" + call + "], response = [" + response.body() + "]");
+                        //Log.d(TAG, "onResponse() called with: " + "call = [" + call + "], response = [" + response.body() + "]");
                         ArrayList<LatLng> points = new ArrayList<LatLng>();
                         for (int i = 0; i < response.body().getRoutes().size(); i++) {
                             for (int j = 0; j < response.body().getRoutes().get(i).getLegs().size(); j++) {
+                                LatLngBounds latLngBounds = new LatLngBounds(
+                                        new LatLng(response.body().getRoutes().get(j).getBounds().getSouthwest().getLat(),
+                                                response.body().getRoutes().get(j).getBounds().getSouthwest().getLng()),
+                                        new LatLng(response.body().getRoutes().get(j).getBounds().getNortheast().getLat(),
+                                                response.body().getRoutes().get(j).getBounds().getNortheast().getLng())
+                                );
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 30));
+
                                 for (int k = 0; k < response.body().getRoutes().get(i).getLegs().get(j).getSteps().size(); k++) {
                                     for (int x = 0; x < response.body().getRoutes().get(i).getLegs().get(j).getSteps().size(); x++) {
-                                        Log.d(TAG, response.body().getRoutes().get(i).getLegs().get(j).getSteps().get(x).getHtmlInstructions());
+                                       // Log.d(TAG, response.body().getRoutes().get(i).getLegs().get(j).getSteps().get(x).getHtmlInstructions());
                                         mMap.addPolyline(new PolylineOptions()
                                                 .addAll(decodePoly(response.body().getRoutes().get(i).getLegs().get(j).getSteps().get(x).getPolyline().getPoints()))
                                                 .width(5)
@@ -131,6 +149,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Log.d(TAG, "onFailure() called with: " + "call = [" + call + "], t = [" + t + "]");
                     }
                 });
+    }
+
+
+
+    public void onShowDirections(View view){
+        Intent intentToDirnsActivity = new Intent(this,DirnsActivity.class);
+        startActivity(intentToDirnsActivity);
     }
 }
 
