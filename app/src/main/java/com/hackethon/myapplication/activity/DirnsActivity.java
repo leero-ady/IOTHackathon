@@ -23,6 +23,9 @@ public class DirnsActivity extends AppCompatActivity {
                 "Step 2: Turn right onto Husen Shah Baba Rd (0.2 km/1 min)\n" +
                 "Step 3: Turn right at the 1st cross street onto Airport Rd/Vishrantwadi Airport RdPass by the gas station (on the left) (1.6 km/3 mins)\n" +
                 "Step 4: Turn right after 509 Chowk (on the left)Pass by Mhasoba Temple (on the left in 700m)Destination will be on the left (2.1 km/4 mins)";
+
+
+
         instruction = new Instruction();
         lists = new ArrayList<>();
         lists = instruction.parseRawData(response);

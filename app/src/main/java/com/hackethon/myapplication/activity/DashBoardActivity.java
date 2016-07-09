@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -122,5 +123,9 @@ public class DashBoardActivity extends Activity {
 
     public static SharedPreferences getInstanceOfSharedPreferences(Context context) {
         return context.getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE);
+    }
+
+    public void goVideo(View view){
+        startActivity(new Intent(this,VideoActivity.class));
     }
 }
