@@ -44,7 +44,13 @@
         <activity
             android:name=".activity.DirnsActivity"
             android:label="@string/title_activity_dirns"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ParkingActivity"
+            android:label="@string/title_activity_parking" />
+        <activity
+            android:name=".activity.OptionActivity"
+            android:label="@string/title_activity_option"></activity>
     </application>
 
 </manifest>

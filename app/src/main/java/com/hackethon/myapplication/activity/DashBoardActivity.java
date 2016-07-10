@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -31,10 +31,10 @@ public class DashBoardActivity extends Activity {
     private SharedPreferences sharedPreferences;
 
     @BindView(R.id.input_from)
-    EditText from;
+    TextView from;
 
     @BindView(R.id.input_to)
-    EditText to;
+    TextView to;
 
     @OnClick(R.id.input_from)
     void openAutoCompleteForFromText() {
@@ -51,7 +51,8 @@ public class DashBoardActivity extends Activity {
         if (!TextUtils.isEmpty(from.getText()) && !TextUtils.isEmpty(to.getText())) {//validation
             sharedPreferences = getInstanceOfSharedPreferences(this);//init it
             saveToSharedPreferences();
-            startActivity(new Intent(this, MapsActivity.class));
+            startActivity(new Intent(this,OptionActivity.class));
+           //startActivity(new Intent(this, MapsActivity.class));
         }
     }
 
@@ -123,9 +124,5 @@ public class DashBoardActivity extends Activity {
 
     public static SharedPreferences getInstanceOfSharedPreferences(Context context) {
         return context.getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE);
-    }
-
-    public void goVideo(View view){
-        startActivity(new Intent(this,VideoActivity.class));
     }
 }

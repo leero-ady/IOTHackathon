@@ -108,8 +108,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
          locationInfo = Util.getLocationInfoObject(this);
          System.out.println("The Location object received is " + locationInfo);
 
-         String origCoord = String.valueOf(locationInfo.getOrigLat()) + "," + String.valueOf(locationInfo.getOrigLong());
-         String  destCoord = String.valueOf(locationInfo.getDestLat()) + "," + String.valueOf(locationInfo.getDestLong());
+        String origCoord = String.valueOf(locationInfo.getOrigLat()) + "," + String.valueOf(locationInfo.getOrigLong());
+        String  destCoord = String.valueOf(locationInfo.getDestLat()) + "," + String.valueOf(locationInfo.getDestLong());
 
                 ((ApplicationClass) getApplicationContext()).getDirectionAPIService().getDirections(origCoord, destCoord).
                 enqueue(new Callback<DirectionModel>() {

@@ -2,4 +2,6 @@
     <string name="app_name">My Application</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_dirns">DirnsActivity</string>
+    <string name="title_activity_parking">ParkingActivity</string>
+    <string name="title_activity_option">OptionActivity</string>
 </resources>

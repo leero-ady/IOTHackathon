@@ -31,7 +31,7 @@ public class CustomAdapter extends ArrayAdapter<Instruction> {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.list_item, null);
         direction = (TextView)view.findViewById(R.id.direction);
-        time = (TextView)view.findViewById(R.id.time);
+        time = (TextView)view.findViewById(R.id.timeValue);
         distance = (TextView)view.findViewById(R.id.distance);
 
         direction.setText(instructions.get(position).getDirection());

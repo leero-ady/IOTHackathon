@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@mipmap/road">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
 
-        <EditText
+
+        <TextView
             android:id="@+id/input_from"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="From where you want to start.."/>
+            android:hint="From where you want to start.."
+            android:clickable="true"
+            android:textColor="#f9f6f6"
+            android:textStyle="italic"
+            android:layout_marginBottom="5dp"
+            android:textSize="20dp"
+            android:layout_marginTop="200dp"/>
 
-        <EditText
+        <TextView
             android:id="@+id/input_to"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="where you want to go..."/>
+            android:hint="where you want to go..."
+            android:clickable="true"
+            android:textColor="#f7f2f2"
+            android:textStyle="italic"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            />
 
         <Button
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="submit"
-            android:layout_gravity="center"/>
+            android:text="Go"
+            android:layout_gravity="center"
+            android:textColor="#f5f6fa"
+            android:textSize="20dp"
+            android:background="#172af2"
+            android:gravity="center" />
 
-        <Button
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:onClick="goVideo"
-            android:text="img"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-</RelativeLayout>
+
+
+</LinearLayout>

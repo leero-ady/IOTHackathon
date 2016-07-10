@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
-        android:id="@+id/time"
+        android:id="@+id/timeValue"
         android:layout_below="@+id/direction"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -28,7 +28,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/distance"
-        android:layout_alignTop="@+id/time"
+        android:layout_alignTop="@+id/timeValue"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 </RelativeLayout>
